@@ -1,0 +1,15 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DAMMatrix"
+        xmlns:DAMComponentLibrary="clr-namespace:DAMComponentLibrary;assembly=DAMComponentLibrary" x:Class="DAMMatrix.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+
+        <DAMComponentLibrary:TableControl HorizontalAlignment="Left" Margin="172,127,0,0" VerticalAlignment="Top" Cols="2" Rows="3" Height="129" Width="346" />
+        
+    </Grid>
+</Window>

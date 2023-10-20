@@ -9,7 +9,13 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
 
-        <DAMComponentLibrary:TableControl HorizontalAlignment="Left" Margin="172,127,0,0" VerticalAlignment="Top" Cols="2" Rows="3" Height="129" Width="346" />
-        
+        <DAMComponentLibrary:TableControl x:Name="mainTable" HorizontalAlignment="Left" Margin="172,127,0,0" VerticalAlignment="Top" Cols="2" Rows="3" Height="129" Width="346" />
+        <Button x:Name="btPosition" Content="Get posisiton" HorizontalAlignment="Left" Margin="88,311,0,0" VerticalAlignment="Top" Height="46" Width="107" Click="btPosition_Click"/>
+        <TextBox x:Name="txtRow" HorizontalAlignment="Left" Margin="257,311,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="157" Height="41"/>
+        <TextBox x:Name="txtCol" HorizontalAlignment="Left" Margin="441,311,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="157" Height="41"/>
+        <Label x:Name="lbResult" Content="Result" HorizontalAlignment="Left" Margin="105,391,0,0" VerticalAlignment="Top"/>
+        <Label Content="Row" HorizontalAlignment="Left" Margin="269,280,0,0" VerticalAlignment="Top"/>
+        <Label Content="Col" HorizontalAlignment="Left" Margin="468,280,0,0" VerticalAlignment="Top"/>
+
     </Grid>
 </Window>

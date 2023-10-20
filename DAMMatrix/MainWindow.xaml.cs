@@ -23,6 +23,23 @@ namespace DAMMatrix
         public MainWindow()
         {
             InitializeComponent();
+
+            this.mainTable.SetContent(1, 1, "Col 1-1");
+        }
+
+        private void btPosition_Click(object sender, RoutedEventArgs e)
+        {
+            int row = Convert.ToInt32(this.txtRow.Text);
+            int col = Convert.ToInt32(this.txtCol.Text);
+
+            try
+            {
+                this.lbResult.Content = this.mainTable.GetContent(row, col);
+            } catch (DAMComponentLibrary.Exceptions.InvalidPositionException ipe)
+            {
+                MessageBox.Show("Min = " + ipe.MinRow);
+                MessageBox.Show(ipe.Message);
+            }
         }
     }
 }

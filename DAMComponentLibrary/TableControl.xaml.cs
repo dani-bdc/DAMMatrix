@@ -62,10 +62,50 @@ namespace DAMComponentLibrary
         }
         #endregion
 
+        #region Public Methods
+
+        public void SetContent(int row, int col, string text)
+        {
+            Label l = new Label();
+            l.Content = text;
+
+            // Put element in the correct position
+            Grid.SetRow(l, row);
+            Grid.SetColumn(l, col);
+
+            // Put element inside the main grid
+            mainGrid.Children.Add(l);
+        }
+
+        public string? GetContent(int row, int col)
+        {
+            string content = string.Empty;
+            Exceptions.InvalidPositionException ipe;
+            
+            if ((row< 0) || (row >=Rows))
+            {
+                ipe = new Exceptions.InvalidPositionException("Incorrect row");
+                ipe.MinRow = 0;
+                ipe.MaxRow = this.Rows - 1; ;
+
+                throw ipe;
+            }
+
+            var obj = this.mainGrid.Children.Cast<Label>().First(e => Grid.GetRow(e) == row && Grid.GetColumn(e) == col);
+
+            if (obj.Content.ToString() != null)
+                return obj.Content.ToString();
+            else
+                return content;
+        }
+
+        #endregion
+
         #region Private properties
         // Init and redraw de table/matrix
         private void InitTable()
         {
+           
             // Clear any existing definition or children
             mainGrid.ColumnDefinitions.Clear();
             mainGrid.RowDefinitions.Clear();
@@ -88,15 +128,7 @@ namespace DAMComponentLibrary
             {
                 for (int r = 0; r < Rows; r++)
                 {
-                    Label l = new Label();                   
-                    l.Content = "Lbl(" + r + "," + c + ")";
                     
-                    // Put element in the correct position
-                    Grid.SetRow(l, r);
-                    Grid.SetColumn(l, c);
-
-                    // Put element inside the main grid
-                    mainGrid.Children.Add(l);
                 }
             }
         

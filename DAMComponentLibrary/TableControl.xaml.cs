@@ -21,45 +21,18 @@ namespace DAMComponentLibrary
     public partial class TableControl : UserControl
     {
         
-        private int _rows = 2;
-        private int _cols = 2;
+        private int _rows = 2; // Grid default rowsCount
+        private int _cols = 2; // Grid default colsCount
         public TableControl()
         {
             InitializeComponent();
             InitTable();
         }
 
-        private void InitTable()
-        {
-            mainGrid.ColumnDefinitions.Clear();
-            mainGrid.RowDefinitions.Clear();
-            mainGrid.Children.Clear();
+        #region Public Properties
 
-            for (int c = 0; c < Cols; c++)
-            {
-                mainGrid.ColumnDefinitions.Add(new ColumnDefinition());
-            }
-            for (int r = 0; r < Rows; r++)
-            {
-                mainGrid.RowDefinitions.Add(new RowDefinition());
-            }
-
-            for (int c = 0; c < Cols; c++)
-            {
-                for (int r = 0; r < Rows; r++)
-                {
-                    Label l = new Label();                   
-                    l.Content = "Lbl(" + r + "," + c + ")";
-                    
-                    Grid.SetRow(l, r);
-                    Grid.SetColumn(l, c);
-
-                    mainGrid.Children.Add(l);
-                }
-            }
-        
-        }
-
+        // Rows Property
+        // Gets or sets grid of rows in grid
         public int Rows
         {
             get
@@ -71,8 +44,10 @@ namespace DAMComponentLibrary
                 _rows = value;
                 InitTable();
             }
-        } 
+        }
 
+        // Cols property
+        // Gets or sets number of cols in grid
         public int Cols
         {
             get
@@ -85,5 +60,48 @@ namespace DAMComponentLibrary
                 InitTable();
             }
         }
+        #endregion
+
+        #region Private properties
+        // Init and redraw de table/matrix
+        private void InitTable()
+        {
+            // Clear any existing definition or children
+            mainGrid.ColumnDefinitions.Clear();
+            mainGrid.RowDefinitions.Clear();
+            mainGrid.Children.Clear();
+
+            // Define columns 
+            for (int c = 0; c < Cols; c++)
+            {
+                mainGrid.ColumnDefinitions.Add(new ColumnDefinition());
+            }
+
+            // Define rows
+            for (int r = 0; r < Rows; r++)
+            {
+                mainGrid.RowDefinitions.Add(new RowDefinition());
+            }
+
+            // Draw grid 
+            for (int c = 0; c < Cols; c++)
+            {
+                for (int r = 0; r < Rows; r++)
+                {
+                    Label l = new Label();                   
+                    l.Content = "Lbl(" + r + "," + c + ")";
+                    
+                    // Put element in the correct position
+                    Grid.SetRow(l, r);
+                    Grid.SetColumn(l, c);
+
+                    // Put element inside the main grid
+                    mainGrid.Children.Add(l);
+                }
+            }
+        
+        }
+
+        #endregion
     }
 }

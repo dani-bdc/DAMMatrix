@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace DAMComponentLibrary.Components
 {
-    internal class MatrixCell : UIElement
+    public class MatrixCell : UIElement
     {
     }
 }

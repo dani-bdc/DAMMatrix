@@ -7,8 +7,7 @@ using System.Windows;
 
 namespace DAMComponentLibrary.Events
 {
-    public class RoutedEventHandler 
+    public class SelectUIElementEventArgs : RoutedEventArgs
     {
-        
     }
 }

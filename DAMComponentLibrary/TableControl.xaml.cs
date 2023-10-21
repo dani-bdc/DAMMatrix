@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAMComponentLibrary.Events;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,14 +21,38 @@ namespace DAMComponentLibrary
     /// </summary>
     public partial class TableControl : UserControl
     {
+        #region Private Variables
         
         private int _rows = 2; // Grid default rowsCount
         private int _cols = 2; // Grid default colsCount
+
+        #endregion
+
+        #region Constructors
+
         public TableControl()
         {
             InitializeComponent();
             InitTable();
         }
+
+        #endregion
+
+        #region Public events
+
+        public delegate void SelectUIElementHandler(object sender, SelectUIElementEventArgs e);
+
+        // Register SelectItemClickEvent
+        public static readonly RoutedEvent SelectItemClickEvent = EventManager.RegisterRoutedEvent("SelectItemClick", RoutingStrategy.Bubble, typeof(SelectUIElementHandler), typeof(TableControl));
+
+        // Provide CLR accessors for assigning an event handler
+        public event SelectUIElementHandler SelectItemClick
+        {
+            add { AddHandler(SelectItemClickEvent, value);}
+            remove { RemoveHandler(SelectItemClickEvent, value);}
+        }
+
+        #endregion
 
         #region Public Properties
 

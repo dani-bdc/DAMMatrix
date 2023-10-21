@@ -1,4 +1,5 @@
-﻿using DAMComponentLibrary.Events;
+﻿using DAMComponentLibrary.Components;
+using DAMComponentLibrary.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -91,15 +92,9 @@ namespace DAMComponentLibrary
 
         public void SetContent(int row, int col, string text)
         {
-            Label l = new Label();
-            l.Content = text;
-
-            // Put element in the correct position
-            Grid.SetRow(l, row);
-            Grid.SetColumn(l, col);
-
-            // Put element inside the main grid
-            mainGrid.Children.Add(l);
+            var obj = this.mainGrid.Children.Cast<MatrixCell>().First(e => Grid.GetRow(e) == row && Grid.GetColumn(e) == col);
+            obj.Text = text;
+            
         }
 
         public string? GetContent(int row, int col)
@@ -116,10 +111,10 @@ namespace DAMComponentLibrary
                 throw ipe;
             }
 
-            var obj = this.mainGrid.Children.Cast<Label>().First(e => Grid.GetRow(e) == row && Grid.GetColumn(e) == col);
+            var obj = this.mainGrid.Children.Cast<MatrixCell>().First(e => Grid.GetRow(e) == row && Grid.GetColumn(e) == col);
 
-            if (obj.Content.ToString() != null)
-                return obj.Content.ToString();
+            if (obj.Text != null)
+                return obj.Text.ToString();
             else
                 return content;
         }
@@ -127,6 +122,23 @@ namespace DAMComponentLibrary
         #endregion
 
         #region Private properties
+
+        public static T? FindParent<T>(DependencyObject child) where T:DependencyObject
+        {
+            DependencyObject parentObject = VisualTreeHelper.GetParent(child);
+
+            if (parentObject == null)
+                return null;
+            else
+            {
+                T? parent = parentObject as T;
+                if (parent != null)
+                    return parent;
+                else
+                    return FindParent<T>(parentObject);
+            }
+        }
+
         // Init and redraw de table/matrix
         private void InitTable()
         {
@@ -154,6 +166,13 @@ namespace DAMComponentLibrary
                 for (int r = 0; r < Rows; r++)
                 {
                     
+                    MatrixCell m;
+                    m = new MatrixCell();
+                    
+                    Grid.SetColumn(m, c);
+                    Grid.SetRow(m, r);
+                    mainGrid.Children.Add(m);
+                    
                 }
             }
         
@@ -163,13 +182,14 @@ namespace DAMComponentLibrary
 
         private void MainGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Label lb;
+            MatrixCell? mc;
             SelectUIElementEventArgs args = new SelectUIElementEventArgs(SelectItemClickEvent);
 
             // Assign properties to the event
-            lb = (Label)e.Source;
-            args.Row = Grid.GetRow(lb);
-            args.Col = Grid.GetRow(lb);
+            //mc = (MatrixCell)e.Source;
+            mc = FindParent<MatrixCell>((DependencyObject)e.Source);
+            args.Row = Grid.GetRow(mc);
+            args.Col = Grid.GetColumn(mc);
 
             // Raise the event
             RaiseEvent(args);

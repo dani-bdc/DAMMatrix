@@ -160,5 +160,20 @@ namespace DAMComponentLibrary
         }
 
         #endregion
+
+        private void MainGrid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Label lb;
+            SelectUIElementEventArgs args = new SelectUIElementEventArgs(SelectItemClickEvent);
+
+            // Assign properties to the event
+            lb = (Label)e.Source;
+            args.Row = Grid.GetRow(lb);
+            args.Col = Grid.GetRow(lb);
+
+            // Raise the event
+            RaiseEvent(args);
+
+        }
     }
 }

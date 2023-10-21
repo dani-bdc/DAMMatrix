@@ -24,7 +24,7 @@ namespace DAMMatrix
         {
             InitializeComponent();
 
-            this.mainTable.SetContent(1, 1, "Col 1-1");
+            this.mainTable.SetContent(1, 0, "Col 1-0");
         }
 
         private void btPosition_Click(object sender, RoutedEventArgs e)

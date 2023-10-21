@@ -14,6 +14,8 @@ namespace DAMComponentLibrary.Events
         public int Row { get; internal set; }
         public MatrixCell? Cell { get; internal set;}
 
+        public SelectUIElementEventArgs(RoutedEvent routedEvent) : base(routedEvent) { }
+
     }
 
 }

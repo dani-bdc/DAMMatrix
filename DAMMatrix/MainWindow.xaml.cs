@@ -1,6 +1,8 @@
-﻿using System;
+﻿using DAMComponentLibrary.Components;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,6 +26,16 @@ namespace DAMMatrix
         {
             InitializeComponent();
 
+            MatrixCellProperties props;
+
+            props = new MatrixCellProperties();
+            Border border;
+            border = new Border();
+            border.BorderThickness = new Thickness(0.5, 0.1, 1, 1);
+            border.Background = Brushes.Orange;
+            props.Border = border;
+
+            this.mainTable.SetCellProperties(0, 1, props);
             this.mainTable.SetContent(0, 0, "Col 0-0");
             this.mainTable.SetContent(0, 1, "Col 0-1");
             this.mainTable.SetContent(1, 0, "Col 1-0");

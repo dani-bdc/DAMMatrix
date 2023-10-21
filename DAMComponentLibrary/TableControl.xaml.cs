@@ -93,8 +93,13 @@ namespace DAMComponentLibrary
         public void SetContent(int row, int col, string text)
         {
             var obj = this.mainGrid.Children.Cast<MatrixCell>().First(e => Grid.GetRow(e) == row && Grid.GetColumn(e) == col);
-            obj.Text = text;
-            
+            obj.Text = text;            
+        }
+
+        public void SetCellProperties(int row, int col, MatrixCellProperties props)
+        {
+            var obj = this.mainGrid.Children.Cast<MatrixCell>().First(e => Grid.GetRow(e) == row && Grid.GetColumn(e) == col);
+            obj.Properties = props;
         }
 
         public string? GetContent(int row, int col)

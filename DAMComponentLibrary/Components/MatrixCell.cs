@@ -1,29 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Markup;
 using System.Windows.Media;
+using System.Xml;
 
 namespace DAMComponentLibrary.Components
 {
     public class MatrixCell : Grid
     {
         private Label lbl;
+        private Border border;
+        private MatrixCellProperties props;
 
         public MatrixCell()
         {
-            this.Background = Brushes.Blue;
-            Border b = new Border();
-            b.BorderThickness = new Thickness(1, 1, 1, 1);
-            b.Background = Brushes.Beige;
-            lbl = new Label();
+            props = new MatrixCellProperties();
+            this.border = new Border();
+            this.lbl = new Label();
 
-            b.Child = lbl;
+            this.RepaintObject();
+            
+        }
 
-            this.Children.Add(b);
+        public MatrixCellProperties Properties
+        {
+            get
+            {
+                return this.props;
+            }
+            set
+            {
+                this.props = value;
+                this.RepaintObject();
+            }
         }
 
         public string? Text
@@ -40,6 +55,24 @@ namespace DAMComponentLibrary.Components
             {
                 lbl.Content = value;
             }
+        }
+
+        private void RepaintObject()
+        {
+            this.Background = props.Background;
+            var str = XamlWriter.Save(props.Border);
+            this.border = (Border)XamlReader.Load(XmlReader.Create(new StringReader(str)));
+
+            if (this.lbl.Parent == null)
+            {
+                this.border.Child = lbl;
+            } else
+            {
+                ((Decorator)this.lbl.Parent).Child = null;
+                this.border.Child = lbl;
+            }
+
+            this.Children.Add(this.border);
         }
     }
 }

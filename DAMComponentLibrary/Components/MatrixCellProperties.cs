@@ -16,7 +16,7 @@ namespace DAMComponentLibrary.Components
         public MatrixCellProperties()
         {
             border = new Border();
-            border.BorderThickness = new Thickness(0.5, 0.1, 1, 1);
+            border.BorderThickness = new Thickness(1, 1, 1, 1);
             border.Background = Brushes.Gray;
         }
 

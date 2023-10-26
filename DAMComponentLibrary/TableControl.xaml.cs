@@ -46,11 +46,21 @@ namespace DAMComponentLibrary
         // Register SelectItemClickEvent
         public static readonly RoutedEvent SelectItemClickEvent = EventManager.RegisterRoutedEvent("SelectItemClick", RoutingStrategy.Bubble, typeof(SelectUIElementHandler), typeof(TableControl));
 
+        // Register SelectItemRightClickEvent
+        public static readonly RoutedEvent SelectItemRightClickEvent = EventManager.RegisterRoutedEvent("SelectItemRightClick", RoutingStrategy.Bubble, typeof(SelectUIElementHandler), typeof(TableControl));
+
         // Provide CLR accessors for assigning an event handler
         public event SelectUIElementHandler SelectItemClick
         {
             add { AddHandler(SelectItemClickEvent, value);}
             remove { RemoveHandler(SelectItemClickEvent, value);}
+        }
+
+        // Provide CLR accessors for assigning an event handler
+        public event SelectUIElementHandler SelectItemRightClick
+        {
+            add { AddHandler(SelectItemRightClickEvent, value); }
+            remove { RemoveHandler(SelectItemRightClickEvent, value); }
         }
 
         #endregion
@@ -163,8 +173,7 @@ namespace DAMComponentLibrary
 
         // Init and redraw de table/matrix
         protected void InitTable()
-        {
-           
+        {           
             // Clear any existing definition or children
             mainGrid.ColumnDefinitions.Clear();
             mainGrid.RowDefinitions.Clear();
@@ -231,20 +240,37 @@ namespace DAMComponentLibrary
             return true;
         }
 
-        private void MainGrid_MouseDown(object sender, MouseButtonEventArgs e)
+        private void mainGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             MatrixCell? mc;
             SelectUIElementEventArgs args = new SelectUIElementEventArgs(SelectItemClickEvent);
 
             // Assign properties to the event
-            //mc = (MatrixCell)e.Source;
+            mc = FindParent<MatrixCell>((DependencyObject)e.Source);
+            if (mc!=null && mc.Properties.Enabled)
+            {
+                args.Row = Grid.GetRow(mc);
+                args.Col = Grid.GetColumn(mc);
+                args.Cell = mc;
+
+                // Raise the event
+                RaiseEvent(args);
+            }
+        }
+
+        private void mainGrid_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MatrixCell? mc;
+            SelectUIElementEventArgs args = new SelectUIElementEventArgs(SelectItemRightClickEvent);
+
+            // Assign properties to the event
             mc = FindParent<MatrixCell>((DependencyObject)e.Source);
             args.Row = Grid.GetRow(mc);
             args.Col = Grid.GetColumn(mc);
+            args.Cell = mc;
 
             // Raise the event
             RaiseEvent(args);
-
         }
     }
 }

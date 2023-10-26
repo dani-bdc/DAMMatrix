@@ -61,5 +61,14 @@ namespace DAMMatrix
         {
             MessageBox.Show("Main table click at position(" + e.Row + "," + e.Col + ")");
         }
+
+        private void mainTable_SelectItemRightClick(object sender, DAMComponentLibrary.Events.SelectUIElementEventArgs e)
+        {
+            if (e.Cell != null)
+            {
+                e.Cell.Properties.Enabled = !e.Cell.Properties.Enabled;
+                e.Cell.RepaintObject();
+            }
+        }
     }
 }

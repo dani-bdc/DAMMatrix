@@ -9,14 +9,14 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
 
-        <DAMComponentLibrary:TableControl x:Name="mainTable" HorizontalAlignment="Left" Margin="54,36,0,0" VerticalAlignment="Top" Cols="2" Rows="3" Height="129" Width="346" SelectItemClick="mainTable_SelectItemClick" />
+        <DAMComponentLibrary:TableControl x:Name="mainTable" HorizontalAlignment="Left" Margin="54,36,0,0" VerticalAlignment="Top" Cols="5" Rows="3" Height="129" Width="346" SelectItemClick="mainTable_SelectItemClick" SelectItemRightClick="mainTable_SelectItemRightClick" />
         <Button x:Name="btPosition" Content="Get posisiton" HorizontalAlignment="Left" Margin="68,249,0,0" VerticalAlignment="Top" Height="46" Width="107" Click="btPosition_Click"/>
         <TextBox x:Name="txtRow" HorizontalAlignment="Left" Margin="237,249,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="157" Height="41"/>
         <TextBox x:Name="txtCol" HorizontalAlignment="Left" Margin="421,249,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="157" Height="41"/>
         <Label x:Name="lbResult" Content="Result" HorizontalAlignment="Left" Margin="85,329,0,0" VerticalAlignment="Top"/>
         <Label Content="Row" HorizontalAlignment="Left" Margin="249,218,0,0" VerticalAlignment="Top"/>
         <Label Content="Col" HorizontalAlignment="Left" Margin="448,218,0,0" VerticalAlignment="Top"/>
-        <Controls:ChessTableControl  HorizontalAlignment="Left" Margin="516,128,0,0" VerticalAlignment="Top"/>
+        <Controls:ChessTableControl  HorizontalAlignment="Left" Margin="448,100,0,0" VerticalAlignment="Top" Height="108" Width="148"/>
 
     </Grid>
 </Window>

@@ -20,6 +20,8 @@ namespace DAMComponentLibrary.Components
             border.Background = Brushes.Gray;
         }
 
+        public bool Enabled { get; set; } = true;
+
         public Brush Background { get; set; } = Brushes.Black;
         public Border Border { 
             
@@ -30,7 +32,6 @@ namespace DAMComponentLibrary.Components
             set
             {
                 border = value;
-
             }
         } 
     }

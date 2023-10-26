@@ -52,7 +52,7 @@ namespace DAMMatrix
                 this.lbResult.Content = this.mainTable.GetContent(row, col);
             } catch (DAMComponentLibrary.Exceptions.InvalidPositionException ipe)
             {
-                MessageBox.Show("Min = " + ipe.MinRow);
+                MessageBox.Show("Min = " + ipe.Min);
                 MessageBox.Show(ipe.Message);
             }
         }

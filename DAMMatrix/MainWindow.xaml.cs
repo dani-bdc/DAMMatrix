@@ -67,6 +67,13 @@ namespace DAMMatrix
             if (e.Cell != null)
             {
                 e.Cell.Properties.Enabled = !e.Cell.Properties.Enabled;
+                if (e.Cell.Properties.Enabled)
+                {
+                    e.Cell.Properties.Border.Background = Brushes.Green;
+                } else
+                {
+                    e.Cell.Properties.Border.Background = Brushes.Red;
+                }
                 e.Cell.RepaintObject();
             }
         }

@@ -1,4 +1,5 @@
 ﻿using DAMComponentLibrary.Components;
+using DAMComponentLibrary.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,10 +57,9 @@ namespace DAMComponentLibrary.Controls
 
         public ChessTableControl()
         {
-            this.Rows = 8;
-            this.Cols = 8;
-
-            //this.InitTable();
+       
+            base.Rows = 8; // Use base.Rows because cannot override rows in this control
+            base.Cols = 8; // Use base.Cols because cannot override cols in this control
 
             MatrixCellProperties whiteProps, blackProps;
             Border whiteBorder, blackBorder;
@@ -77,9 +77,9 @@ namespace DAMComponentLibrary.Controls
 
             for (var r = 0; r < 8; r++)
             {
-                for(var c=0; c<8; c++)
+                for (var c = 0; c < 8; c++)
                 {
-                    if ((r+c) %2 == 1)
+                    if ((r + c) % 2 == 1)
                     {
                         this.SetCellProperties(r, c, blackProps);
                     } else
@@ -89,8 +89,27 @@ namespace DAMComponentLibrary.Controls
                 }
             }
 
+        }
+
+
+        public override int Rows
+        {
+            get => base.Rows; 
             
-            
+            set
+            {
+                throw new PropertyChangeException("Cannot change Rows in control");
+            }
+        }
+
+        public override int Cols
+        {
+            get => base.Cols;
+
+            set
+            {
+                throw new PropertyChangeException("Cannot change Cols in control");
+            }
         }
     }
 }

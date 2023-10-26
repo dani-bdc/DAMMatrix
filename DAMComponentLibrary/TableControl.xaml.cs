@@ -59,7 +59,7 @@ namespace DAMComponentLibrary
 
         // Rows Property
         // Gets or sets grid of rows in grid
-        public int Rows
+        public virtual int Rows
         {
             get
             {
@@ -67,6 +67,15 @@ namespace DAMComponentLibrary
             }
             set
             {
+                if (value < 1)
+                {
+                    var ipe = new Exceptions.InvalidPositionException("Incorrect number of rows");
+                    ipe.Min = 0;
+                    ipe.Max = int.MaxValue - 1;
+
+                    throw ipe;
+                }
+
                 _rows = value;
                 InitTable();
             }
@@ -74,7 +83,7 @@ namespace DAMComponentLibrary
 
         // Cols property
         // Gets or sets number of cols in grid
-        public int Cols
+        public virtual int Cols
         {
             get
             {
@@ -82,6 +91,15 @@ namespace DAMComponentLibrary
             }
             set
             {
+                if (value < 1)
+                {
+                    var ipe = new Exceptions.InvalidPositionException("Incorrect number of columns");
+                    ipe.Min = 0;
+                    ipe.Max = int.MaxValue - 1;
+
+                    throw ipe;
+                }
+                
                 _cols = value;
                 InitTable();
             }
@@ -110,8 +128,17 @@ namespace DAMComponentLibrary
             if ((row< 0) || (row >=Rows))
             {
                 ipe = new Exceptions.InvalidPositionException("Incorrect row");
-                ipe.MinRow = 0;
-                ipe.MaxRow = this.Rows - 1; ;
+                ipe.Min = 0;
+                ipe.Max = this.Rows - 1; ;
+
+                throw ipe;
+            }
+
+            if ((col< 0) || (col >= Cols))
+            {
+                ipe = new Exceptions.InvalidPositionException("Incorrect column");
+                ipe.Min = 0;
+                ipe.Max = this.Cols - 1; ;
 
                 throw ipe;
             }

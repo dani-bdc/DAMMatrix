@@ -10,8 +10,8 @@ namespace DAMComponentLibrary.Exceptions
     public class InvalidPositionException : Exception
     {
 
-        public int MinRow { get; set; } = 0;
-        public int MaxRow { get; set; } = 0;
+        public int Min { get; set; } = 0;
+        public int Max { get; set; } = 0;
 
         public InvalidPositionException(string message) : base(message)
         {

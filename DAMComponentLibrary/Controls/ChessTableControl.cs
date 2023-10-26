@@ -48,16 +48,18 @@ namespace DAMComponentLibrary.Controls
     /// </summary>
     public class ChessTableControl : TableControl
     {
-        static ChessTableControl()
+        /*static ChessTableControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ChessTableControl), new FrameworkPropertyMetadata(typeof(ChessTableControl)));
             
-        }
+        }*/
 
         public ChessTableControl()
         {
             this.Rows = 8;
             this.Cols = 8;
+
+            //this.InitTable();
 
             MatrixCellProperties whiteProps, blackProps;
             Border whiteBorder, blackBorder;
@@ -77,7 +79,7 @@ namespace DAMComponentLibrary.Controls
             {
                 for(var c=0; c<8; c++)
                 {
-                    if ((r+c) %2 == 0)
+                    if ((r+c) %2 == 1)
                     {
                         this.SetCellProperties(r, c, blackProps);
                     } else
@@ -86,6 +88,7 @@ namespace DAMComponentLibrary.Controls
                     }
                 }
             }
+
             
             
         }

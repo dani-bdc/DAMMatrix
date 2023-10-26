@@ -57,7 +57,7 @@ namespace DAMComponentLibrary.Components
             }
         }
 
-        private void RepaintObject()
+        protected void RepaintObject()
         {
             this.Background = props.Background;
             var str = XamlWriter.Save(props.Border);

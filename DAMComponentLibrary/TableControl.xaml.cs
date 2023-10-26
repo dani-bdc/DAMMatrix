@@ -145,7 +145,7 @@ namespace DAMComponentLibrary
         }
 
         // Init and redraw de table/matrix
-        private void InitTable()
+        protected void InitTable()
         {
            
             // Clear any existing definition or children

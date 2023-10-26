@@ -31,6 +31,7 @@ namespace DAMMatrix
             props = new MatrixCellProperties();
             Border border;
             border = new Border();
+            
             //border.BorderThickness = new Thickness(0.5, 0.1, 1, 1);
             border.Background = Brushes.Orange;
             props.Border = border;
@@ -45,7 +46,7 @@ namespace DAMMatrix
         {
             int row = Convert.ToInt32(this.txtRow.Text);
             int col = Convert.ToInt32(this.txtCol.Text);
-
+            
             try
             {
                 this.lbResult.Content = this.mainTable.GetContent(row, col);

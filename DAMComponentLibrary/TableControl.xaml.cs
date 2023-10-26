@@ -110,12 +110,18 @@ namespace DAMComponentLibrary
 
         public void SetContent(int row, int col, string text)
         {
+            // Check if row and column is valid
+            RowColumnValidOrException(row, col);
+
             var obj = this.mainGrid.Children.Cast<MatrixCell>().First(e => Grid.GetRow(e) == row && Grid.GetColumn(e) == col);
             obj.Text = text;            
         }
 
         public void SetCellProperties(int row, int col, MatrixCellProperties props)
         {
+            // Check if row and column is valid
+            RowColumnValidOrException(row, col);
+
             var obj = this.mainGrid.Children.Cast<MatrixCell>().First(e => Grid.GetRow(e) == row && Grid.GetColumn(e) == col);
             obj.Properties = props;
         }
@@ -123,25 +129,9 @@ namespace DAMComponentLibrary
         public string? GetContent(int row, int col)
         {
             string content = string.Empty;
-            Exceptions.InvalidPositionException ipe;
             
-            if ((row< 0) || (row >=Rows))
-            {
-                ipe = new Exceptions.InvalidPositionException("Incorrect row");
-                ipe.Min = 0;
-                ipe.Max = this.Rows - 1; ;
-
-                throw ipe;
-            }
-
-            if ((col< 0) || (col >= Cols))
-            {
-                ipe = new Exceptions.InvalidPositionException("Incorrect column");
-                ipe.Min = 0;
-                ipe.Max = this.Cols - 1; ;
-
-                throw ipe;
-            }
+            // Check if row and column is valid
+            RowColumnValidOrException(row, col);
 
             var obj = this.mainGrid.Children.Cast<MatrixCell>().First(e => Grid.GetRow(e) == row && Grid.GetColumn(e) == col);
 
@@ -211,6 +201,35 @@ namespace DAMComponentLibrary
         }
 
         #endregion
+
+        /*
+         * This function cheks if the row and the col is valid
+         * If not valids throws and exception
+         */
+        private bool RowColumnValidOrException(int row, int col)
+        {
+            Exceptions.InvalidPositionException ipe;
+
+            if ((row < 0) || (row >= Rows))
+            {
+                ipe = new Exceptions.InvalidPositionException("Incorrect row");
+                ipe.Min = 0;
+                ipe.Max = this.Rows - 1; ;
+
+                throw ipe;
+            }
+
+            if ((col < 0) || (col >= Cols))
+            {
+                ipe = new Exceptions.InvalidPositionException("Incorrect column");
+                ipe.Min = 0;
+                ipe.Max = this.Cols - 1; ;
+
+                throw ipe;
+            }
+
+            return true;
+        }
 
         private void MainGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {

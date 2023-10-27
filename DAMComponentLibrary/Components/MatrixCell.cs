@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Xml;
 
 namespace DAMComponentLibrary.Components
@@ -15,6 +16,7 @@ namespace DAMComponentLibrary.Components
     public class MatrixCell : Grid
     {
         private Label lbl;
+        private Image image;
         private Border border;
         private MatrixCellProperties props;
 
@@ -23,6 +25,11 @@ namespace DAMComponentLibrary.Components
             props = new MatrixCellProperties();
             this.border = new Border();
             this.lbl = new Label();
+            this.image = new Image();
+            this.image.Source = new BitmapImage(new Uri("Images/none.png", UriKind.Relative));
+
+            this.RowDefinitions.Add(new RowDefinition());
+            this.ColumnDefinitions.Add(new ColumnDefinition());
 
             this.RepaintObject();
             

@@ -22,6 +22,8 @@ namespace DAMComponentLibrary.Components
 
         public bool Enabled { get; set; } = true;
 
+        public bool ShowImage { get; set; } = false; // By default don't show any image
+
         public Brush Background { get; set; } = Brushes.Black;
         public Border Border { 
             

@@ -28,9 +28,6 @@ namespace DAMComponentLibrary.Components
             this.image = new Image();
             this.image.Source = new BitmapImage(new Uri("Images/none.png", UriKind.Relative));
 
-            this.RowDefinitions.Add(new RowDefinition());
-            this.ColumnDefinitions.Add(new ColumnDefinition());
-
             this.RepaintObject();
             
         }
@@ -69,7 +66,7 @@ namespace DAMComponentLibrary.Components
             this.Background = props.Background;
             var str = XamlWriter.Save(props.Border);
             this.border = (Border)XamlReader.Load(XmlReader.Create(new StringReader(str)));
-
+            
             if (this.lbl.Parent == null)
             {
                 this.border.Child = lbl;
@@ -78,7 +75,7 @@ namespace DAMComponentLibrary.Components
                 ((Decorator)this.lbl.Parent).Child = null;
                 this.border.Child = lbl;
             }
-
+           
             this.Children.Add(this.border);
         }
     }
